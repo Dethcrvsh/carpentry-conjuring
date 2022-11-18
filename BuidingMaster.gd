@@ -27,4 +27,5 @@ func update_cursor():
 		cursormap.set_cell(tile.x, tile.y, -1)
 	if cursor_pos != null:
 		cursormap.set_cell(cursor_pos.x, cursor_pos.y, 0)
+		cursor_pos = null
 	
