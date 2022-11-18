@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/icon.png-9a25435582839ca3cd8bb514b597c2d9.stex"
+path="res://.import/pinetree.png-2c1a9e277957ebd357a104a8282d3515.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/icon.png"
-dest_files=[ "res://.import/icon.png-9a25435582839ca3cd8bb514b597c2d9.stex" ]
+source_file="res://assets/sprites/pinetree.png"
+dest_files=[ "res://.import/pinetree.png-2c1a9e277957ebd357a104a8282d3515.stex" ]
 
 [params]
 
