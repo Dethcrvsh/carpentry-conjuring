@@ -2,6 +2,8 @@ extends KinematicBody2D
 
 var vel = Vector2.ZERO
 const speed = 200
+const acc = 30
+const decc = 50
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -21,5 +23,13 @@ func do_player_movement():
 		move_dir.x = -1
 	if Input.is_action_pressed("move_right"):
 		move_dir.x = 1
-	vel = move_dir.normalized()*speed
+	# Deccelerate if no inputs
+	if move_dir.x == 0 and move_dir.y == 0:
+		if vel.length() < decc:
+			vel = Vector2.ZERO
+		else:
+			vel = vel - vel.normalized()*decc
+	else:
+		var run_force = move_dir.normalized()*acc
+		vel = (vel+run_force).clamped(speed)
 	move_and_slide(vel)
