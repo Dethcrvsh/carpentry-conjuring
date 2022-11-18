@@ -4,6 +4,7 @@
 [ext_resource path="res://Enemy.gd" type="Script" id=2]
 
 [sub_resource type="CapsuleShape2D" id=1]
+height = 0.0
 
 [node name="Enemy" type="KinematicBody2D"]
 script = ExtResource( 2 )
@@ -12,5 +13,6 @@ script = ExtResource( 2 )
 shape = SubResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 0, -2 )
 scale = Vector2( 0.004, 0.005 )
 texture = ExtResource( 1 )

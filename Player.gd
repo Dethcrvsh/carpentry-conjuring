@@ -4,6 +4,7 @@ var vel = Vector2.ZERO
 var build_mode = false
 var attack_timer = 0
 var cooldown = 0
+var health = 50
 const SPEED = 200
 const ACC = 60
 const DECC = 40
@@ -84,3 +85,9 @@ func do_attack_check(delta):
 func do_mode_input():
 	if Input.is_action_just_pressed("mode"):
 		build_mode = !build_mode
+		
+func take_damage(dmg: int):
+	print("Took " + str(dmg) + " damage")
+	health -= dmg
+	if health <= 0:
+		print("ded")

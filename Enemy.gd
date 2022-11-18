@@ -5,7 +5,13 @@ onready var base = get_parent().get_node("Base")
 
 # If the player gets inside this radius of the enemy, he go rage mode
 const ANGER_RADIUS = 50
+const ATTACK_RADIUS = 20
+
+const DAMAGE = 5
+const ATTACK_SPEED = 1
+
 const ANGER_TIME = 5
+
 const MOVEMENT_SPEED = 25
 const ANGER_MOVEMENT_SPEED = 70
 
@@ -19,6 +25,7 @@ var states = []
 
 # Counters for keeping track of time limits related to behaviours
 var angry_counter = 0
+var last_attack = ATTACK_SPEED
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -34,6 +41,12 @@ func _physics_process(delta):
 		do_anger(delta)
 	elif ATTACK_BASE in states:
 		do_base_attack()
+	
+	if get_player_distance() < ATTACK_RADIUS and last_attack >= ATTACK_SPEED:
+		last_attack = 0
+		player.take_damage(5)
+	
+	last_attack += delta
 
 func handle_states():
 	"""Handle the different states of the enemies behaviour"""
