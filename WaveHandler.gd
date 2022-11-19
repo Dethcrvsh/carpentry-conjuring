@@ -26,7 +26,7 @@ onready var SPAWN_POINTS = [
 ]
 onready var enemies_node = get_parent().get_parent().get_node("enemies")
 
-var wave_num = 0
+var wave_num = 10
 
 # The number of directions with the corresponding wave
 var num_of_dir = {[0, 1]: 1, [1, 2]: 2, [2, 3]: 3, [3, INF]: 4}
@@ -87,12 +87,12 @@ func do_next_wave():
 
 func get_spawn_directions():
 	var directions = [NORTH, EAST, SOUTH, WEST]
+	directions.shuffle()
 	var dir_num = get_num_of_dir()
 	
 	# Pop a random direction
 	for i in range(4 - dir_num):
-		var rand_index = randi()%directions.size()
-		directions.pop_at(rand_index)
+		directions.pop_front()
 	
 	return directions
 	
