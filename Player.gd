@@ -5,6 +5,11 @@ var build_mode = false
 var attack_timer = 0
 var cooldown = 0
 var health = 50
+enum {BlOCKSHELF, STOL, ARMEDCHAIR}
+var buildings = [BlOCKSHELF, STOL, ARMEDCHAIR]
+var inv = {BlOCKSHELF:0, STOL:0, ARMEDCHAIR:0}
+var inv_selected_index = 0
+var wood = 0
 const SPEED = 200
 const ACC = 60
 const DECC = 40
@@ -26,6 +31,7 @@ func _physics_process(delta):
 	do_mouse_input(delta)
 	do_attack_check(delta)
 	do_mode_input()
+	do_inv_check()
 
 func do_player_movement():
 	# Look at player input
@@ -91,3 +97,15 @@ func take_damage(dmg: int):
 	health -= dmg
 	if health <= 0:
 		print("ded")
+		
+func do_inv_check():
+	if build_mode:
+		if Input.is_action_just_pressed("inv_up"):
+			inv_selected_index += 1
+			if inv_selected_index > len(buildings):
+				inv_selected_index = 0
+		if Input.is_action_just_pressed("inv_down"):
+			inv_selected_index -= 1
+			if inv_selected_index < 0:
+				inv_selected_index = len(buildings)
+		print(buildings[inv_selected_index])
