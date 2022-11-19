@@ -83,7 +83,8 @@ func move_towards(point: Vector2, speed: int):
 	).normalized()
 	move_and_slide(vel * speed)
 	
-
+func hit_by_proj():
+	print("Oof")
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
 #	pass

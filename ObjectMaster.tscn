@@ -60,7 +60,6 @@ cell_size = Vector2( 16, 16 )
 format = 1
 
 [node name="CollisionMap" type="TileMap" parent="."]
-modulate = Color( 1, 1, 1, 0 )
 tile_set = SubResource( 2 )
 cell_size = Vector2( 16, 16 )
 cell_tile_origin = 2
