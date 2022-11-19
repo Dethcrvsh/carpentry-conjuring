@@ -15,13 +15,16 @@ const ANGER_TIME = 5
 
 const MOVEMENT_SPEED = 25
 const ANGER_MOVEMENT_SPEED = 70
+const STUCK_COOLDOWN = 50
 
+var stuck_cooldown = 0
 var max_hp = 20
 var current_hp = max_hp
 
 # Different states of behaviour
 const ANGRY = 0
 const ATTACK_BASE = 1
+const STUCK = 2
 
 # The current state of the enemy. Might want a combination of
 # behaviours in the future
@@ -44,7 +47,9 @@ func _process(delta):
 func _physics_process(delta):
 	handle_states()
 	
-	if ANGRY in states:
+	if STUCK in states:
+		do_stuck()
+	elif ANGRY in states:
 		do_anger(delta)
 	elif ATTACK_BASE in states:
 		do_base_attack()
@@ -79,6 +84,12 @@ func do_anger(delta):
 
 func do_base_attack():
 	follow_path()
+
+func do_stuck():
+	stuck_cooldown -= 1
+	if stuck_cooldown == 0:
+		print("Became unstuck")
+		become_unstuck()
 
 func get_player_distance() -> float:
 	return self.get_position().distance_to(player.get_position())
@@ -126,3 +137,12 @@ func set_hp(num):
 	current_hp = num
 	max_hp = num
 
+func is_enemy():
+	pass
+
+func become_stuck():
+	stuck_cooldown = STUCK_COOLDOWN
+	states = [STUCK]
+
+func become_unstuck():
+	states = []
