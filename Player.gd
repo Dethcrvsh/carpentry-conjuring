@@ -15,6 +15,7 @@ const ACC = 60
 const DECC = 40
 const ATTACK_TIME = 0.2
 const COOLDOWN_TIME = 1
+const PICKUP_WOOD = 5
 
 onready var build_master = get_parent().get_node("ObjectMaster")
 onready var rot_point = $rotation_point
@@ -23,7 +24,7 @@ onready var icon = $rotation_point/Icon
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass 
+	axe_point.set_process(false) 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
@@ -85,8 +86,10 @@ func do_attack_check(delta):
 		icon.visible = true
 		cooldown = COOLDOWN_TIME
 		attack_timer -= delta
+		axe_point.set_process(true)
 	else:
 		icon.visible = false
+		axe_point.set_process(false) 
 
 func do_mode_input():
 	if Input.is_action_just_pressed("mode"):
@@ -97,6 +100,9 @@ func take_damage(dmg: int):
 	health -= dmg
 	if health <= 0:
 		print("ded")
+
+func pickup_wood():
+	wood += PICKUP_WOOD
 		
 func do_inv_check():
 	if build_mode:
