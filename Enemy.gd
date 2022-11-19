@@ -2,6 +2,7 @@ extends KinematicBody2D
 
 onready var player = get_parent().get_parent().get_node("Player")
 onready var base = get_parent().get_parent().get_node("Base")
+onready var path_finder = get_parent().get_parent().get_node("PathFinder")
 
 # If the player gets inside this radius of the enemy, he go rage mode
 const ANGER_RADIUS = 50
@@ -22,6 +23,8 @@ const ATTACK_BASE = 1
 # The current state of the enemy. Might want a combination of
 # behaviours in the future
 var states = []
+
+var path = []
 
 # Counters for keeping track of time limits related to behaviours
 var angry_counter = 0
@@ -53,8 +56,9 @@ func handle_states():
 	# If enemy has no state, attack the base
 	if not states:
 		states.append(ATTACK_BASE)
-	
-	# Stop attacking the base and become angrys
+		path = path_finder.calc_path(self.get_position(), base.get_position())
+			
+	# Stop attacking the base and become angry
 	if not ANGRY in states and get_player_distance() < ANGER_RADIUS:
 		states.append(ANGRY)
 		states.erase(ATTACK_BASE)
@@ -69,10 +73,18 @@ func do_anger(delta):
 	angry_counter += delta
 
 func do_base_attack():
-	move_towards(base.get_position(), MOVEMENT_SPEED)
+	follow_path()
 
 func get_player_distance() -> float:
 	return self.get_position().distance_to(player.get_position())
+
+func follow_path():
+	if path:
+		var next_point = path[0]
+		if self.get_position().distance_to(next_point) <= 1:
+			path.pop_front()
+		else:
+			move_towards(next_point, MOVEMENT_SPEED)
 
 func move_towards(point: Vector2, speed: int):
 	var enemy_pos = self.get_position()
@@ -81,8 +93,19 @@ func move_towards(point: Vector2, speed: int):
 		point.x - enemy_pos.x, 
 		point.y - enemy_pos.y
 	).normalized()
-	move_and_slide(vel * speed)
 	
+	move_and_slide(vel * speed)
+	flip_sprite(vel)
+
+func flip_sprite(vel: Vector2):
+	# TODO: Stop the spasm
+	var dir = vel.x
+	
+	if dir < 0:
+		get_node("Sprite").set_flip_h(true)
+	elif dir > 0:
+		get_node("Sprite").set_flip_h(false)
+
 func hit_by_proj():
 	print("Oof")
 # Called every frame. 'delta' is the elapsed time since the previous frame.
