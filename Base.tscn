@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://assets/sprites/Inside_house.png" type="Texture" id=1]
 [ext_resource path="res://CraftArea.gd" type="Script" id=2]
@@ -11,6 +11,9 @@ extents = Vector2( 10, 20.5 )
 
 [sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 82, 56 )
+
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 8, 3 )
 
 [node name="Base" type="Node2D"]
 z_index = -1
@@ -41,6 +44,14 @@ script = ExtResource( 2 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CraftArea"]
 position = Vector2( 0, 10 )
 shape = SubResource( 3 )
+
+[node name="Entrance" type="StaticBody2D" parent="."]
+position = Vector2( 0, 69 )
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Entrance"]
+shape = SubResource( 4 )
 
 [connection signal="body_entered" from="CraftArea" to="CraftArea" method="_on_CraftArea_body_entered"]
 [connection signal="body_exited" from="CraftArea" to="CraftArea" method="_on_CraftArea_body_exited"]
