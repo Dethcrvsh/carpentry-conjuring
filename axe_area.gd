@@ -1,10 +1,5 @@
 extends Area2D
-var counter = 0
-
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
-
+var timer = 0.2
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -13,6 +8,11 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	for area in get_overlapping_areas():
-		if area.get_parent().has_method("hit_by_axe"):
-			area.get_parent().hit_by_axe()
+	timer -= delta
+	if timer <= 0:
+		queue_free()
+
+func _on_axe_hitbox_area_entered(area):
+	print("swing")
+	if area.get_parent().has_method("hit_by_axe"):
+		area.get_parent().hit_by_axe()

@@ -21,7 +21,8 @@ func shoot_towards(pos):
 	velocity = (pos-self.position).normalized()*SPEED
 	self.look_at(pos)
 
-func _on_Node2D_body_entered(body):
-	if body.has_method("hit_by_proj"):
-		body.hit_by_proj(DAMAGE)
+
+func _on_Node2D_area_entered(area):
+	if area.get_parent().has_method("hit_by_proj"):
+		area.get_parent().hit_by_proj(DAMAGE)
 		queue_free()
