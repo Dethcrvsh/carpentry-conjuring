@@ -3,8 +3,9 @@ extends KinematicBody2D
 var vel = Vector2.ZERO
 var build_mode = false
 var craft_mode = false
+var dead = false
 var cooldown = 0
-var health = 50
+var health = 20
 var buildings = ["BlOCKSHELF", "STOL", "ARMEDCHAIR"]
 var build_costs = {"BlOCKSHELF":2, "STOL":10, "ARMEDCHAIR":15}
 var inv = {"BlOCKSHELF":0, "STOL":0, "ARMEDCHAIR":0}
@@ -16,12 +17,15 @@ const ACC = 60
 const DECC = 40
 const ATTACK_TIME = 0.2
 const COOLDOWN_TIME = 1
+const MAX_HP = 20
 
 onready var build_master = get_parent().get_node("ObjectMaster")
 onready var rot_point = $rotation_point
 onready var axe_point = $rotation_point/axe_point
 
 const axe_attack = preload("res://axe_hitbox.tscn")
+const respawn_timer = preload("res://RespawnTimer.tscn")
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -41,19 +45,20 @@ func _physics_process(delta):
 func do_player_movement():
 	# Look at player input
 	var move_dir = Vector2.ZERO
-	if Input.is_action_pressed("move_up"):
-		move_dir.y = -1
-	if Input.is_action_pressed("move_down"):
-		move_dir.y = 1
-	if Input.is_action_pressed("move_up") and Input.is_action_pressed("move_down"):
-		move_dir.y = 0
-		
-	if Input.is_action_pressed("move_left"):
-		move_dir.x = -1
-	if Input.is_action_pressed("move_right"):
-		move_dir.x = 1
-	if Input.is_action_pressed("move_right") and Input.is_action_pressed("move_left"):
-		move_dir.x = 0
+	if not dead:
+		if Input.is_action_pressed("move_up"):
+			move_dir.y = -1
+		if Input.is_action_pressed("move_down"):
+			move_dir.y = 1
+		if Input.is_action_pressed("move_up") and Input.is_action_pressed("move_down"):
+			move_dir.y = 0
+			
+		if Input.is_action_pressed("move_left"):
+			move_dir.x = -1
+		if Input.is_action_pressed("move_right"):
+			move_dir.x = 1
+		if Input.is_action_pressed("move_right") and Input.is_action_pressed("move_left"):
+			move_dir.x = 0
 		
 	# Deccelerate if no inputs
 	if move_dir.x == 0 and move_dir.y == 0:
@@ -97,7 +102,17 @@ func take_damage(dmg: int):
 	print("Took " + str(dmg) + " damage")
 	health -= dmg
 	if health <= 0:
-		print("ded")
+		die()
+		
+func die():
+	var retimer = respawn_timer.instance()
+	retimer.set_player(self)
+	retimer.set_camera()
+	get_parent().add_child(retimer)
+	self.position = get_parent().get_node("spawn").position
+	self.visible = false
+	self.health = MAX_HP
+	self.dead = true
 		
 func pickup_wood():
 	wood += 5
