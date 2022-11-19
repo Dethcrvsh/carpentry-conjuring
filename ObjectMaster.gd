@@ -56,8 +56,9 @@ func add_collision(pos):
 func update_cursor():
 	for tile in cursormap.get_used_cells():
 		cursormap.set_cell(tile.x, tile.y, -1)
+
 	if cursor_pos != null:
-		cursormap.set_cell(cursor_pos.x, cursor_pos.y, 1)
+		cursormap.set_cell(cursor_pos.x, cursor_pos.y, 0)
 		cursor_pos = null
 	
 func spawn_trees():
