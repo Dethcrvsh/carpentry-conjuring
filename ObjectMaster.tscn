@@ -72,3 +72,5 @@ tile_data = PoolIntArray( -786418, 0, 0, -786417, 0, 0, -786416, 0, 0, -786415, 
 [node name="Objects" type="Node2D" parent="."]
 
 [node name="buildings" type="Node2D" parent="Objects"]
+
+[node name="nature" type="Node2D" parent="Objects"]

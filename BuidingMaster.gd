@@ -4,11 +4,14 @@ extends Node2D
 onready var collmap = $CollisionMap
 onready var cursormap = $CursorMap
 onready var buildobjs = $Objects/buildings
+onready var natureobjs = $Objects/nature
 
 const Stol = preload("res://Stol.tscn")
+const Gran = preload("res://Gran.tscn")
 
 var cursor_pos = null
 const buildings = {"BlOCKSHELF":Stol, "STOL":Stol, "ARMEDCHAIR":Stol}
+const fauna = {"GRAN":Gran,}
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
