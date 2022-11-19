@@ -16,12 +16,13 @@ z_index = -3
 texture = ExtResource( 1 )
 
 [node name="Player" parent="." instance=ExtResource( 2 )]
+position = Vector2( 0, 35 )
 
 [node name="ObjectMaster" parent="." instance=ExtResource( 3 )]
 
 [node name="Base" parent="." instance=ExtResource( 5 )]
 position = Vector2( -2, 0 )
-z_index = -1
+z_index = -2
 
 [node name="PathFinder" type="Node2D" parent="."]
 script = ExtResource( 6 )

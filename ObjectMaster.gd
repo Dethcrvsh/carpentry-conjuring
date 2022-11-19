@@ -18,7 +18,7 @@ const fauna = {"GRAN":Gran}
 const fauna_drop = {"GRAN":wood_drop}
 
 # Given in mouse pos
-const GRAN_POS = [Vector2(-9, 0)]
+const GRAN_POS = [Vector2(-9, 0),Vector2(-8, 0),Vector2(-7, 0)]
 
 
 # Called when the node enters the scene tree for the first time.
@@ -49,8 +49,9 @@ func put_cursor(pos):
 func update_cursor():
 	for tile in cursormap.get_used_cells():
 		cursormap.set_cell(tile.x, tile.y, -1)
+
 	if cursor_pos != null:
-		cursormap.set_cell(cursor_pos.x, cursor_pos.y, 1)
+		cursormap.set_cell(cursor_pos.x, cursor_pos.y, 0)
 		cursor_pos = null
 	
 func spawn_trees():
