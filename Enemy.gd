@@ -3,7 +3,6 @@ extends KinematicBody2D
 onready var player = get_parent().get_parent().get_node("Player")
 onready var base = get_parent().get_parent().get_node("Base")
 onready var path_finder = get_parent().get_parent().get_node("PathFinder")
->>>>>>> 0f6839a7ffe33a824e3b5186f14c043f8c83f8d3
 
 # If the player gets inside this radius of the enemy, he go rage mode
 const ANGER_RADIUS = 50
