@@ -5,18 +5,18 @@ var build_mode = false
 var attack_timer = 0
 var cooldown = 0
 var health = 50
-enum {BlOCKSHELF, STOL, ARMEDCHAIR}
-var buildings = [BlOCKSHELF, STOL, ARMEDCHAIR]
-var inv = {BlOCKSHELF:0, STOL:0, ARMEDCHAIR:0}
+var buildings = ["BlOCKSHELF", "STOL", "ARMEDCHAIR"]
+var inv = {"BlOCKSHELF":0, "STOL":0, "ARMEDCHAIR":0}
 var inv_selected_index = 0
 var wood = 0
+const inv_actions = {"inv_i_1":0,"inv_i_2":1,"inv_i_3":2,"inv_i_4":3}
 const SPEED = 200
 const ACC = 60
 const DECC = 40
 const ATTACK_TIME = 0.2
 const COOLDOWN_TIME = 1
 
-onready var build_master = get_parent().get_node("BuildingMaster")
+onready var build_master = get_parent().get_node("ObjectMaster")
 onready var rot_point = $rotation_point
 onready var axe_point = $rotation_point/axe_area
 onready var icon = $rotation_point/Icon
@@ -71,7 +71,7 @@ func do_mouse_input(delta):
 	if build_mode:
 		build_master.put_cursor(mous_pos)
 		if Input.is_action_just_pressed("build"):
-			build_master.build_at(mous_pos)
+			build_master.build_at(mous_pos, buildings[inv_selected_index])
 	else:
 		if attack_timer <= 0:
 			rot_point.look_at(mous_pos)
@@ -100,7 +100,11 @@ func take_damage(dmg: int):
 		
 func do_inv_check():
 	if build_mode:
-		if Input.is_action_just_pressed("inv_up"):
+		for i in inv_actions:
+			if Input.is_action_just_pressed(i):
+				inv_selected_index = inv_actions[i]
+		
+		"""if Input.is_action_just_pressed("inv_up"):
 			inv_selected_index += 1
 			if inv_selected_index > len(buildings):
 				inv_selected_index = 0
@@ -108,4 +112,4 @@ func do_inv_check():
 			inv_selected_index -= 1
 			if inv_selected_index < 0:
 				inv_selected_index = len(buildings)
-		print(buildings[inv_selected_index])
+		print(buildings[inv_selected_index])"""
