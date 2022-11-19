@@ -8,7 +8,7 @@
 [ext_resource path="res://CycleHandler.gd" type="Script" id=7]
 [ext_resource path="res://WaveHandler.gd" type="Script" id=8]
 
-[node name="Main" type="Node2D"]
+[node name="Map" type="Node2D"]
 
 [node name="spawn" type="Position2D" parent="."]
 position = Vector2( 0, 45 )
