@@ -4,8 +4,8 @@ onready var wave_handler = get_node("WaveHandler")
 onready var enemies = get_parent().get_node("enemies")
 onready var color = get_parent().get_parent().get_node("CanvasLayer").get_node("ColorRect")
 
-const DAY_TIME_LENGTH = 60
-const FADE_TIME = 20
+const DAY_TIME_LENGTH = 120
+const FADE_TIME = 30
 
 # Enums for times of day
 const DAY = 0
