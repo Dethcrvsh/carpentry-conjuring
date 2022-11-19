@@ -16,6 +16,9 @@ const ANGER_TIME = 5
 const MOVEMENT_SPEED = 25
 const ANGER_MOVEMENT_SPEED = 70
 
+var max_hp = 20
+var current_hp = max_hp
+
 # Different states of behaviour
 const ANGRY = 0
 const ATTACK_BASE = 1
@@ -29,6 +32,7 @@ var path = []
 # Counters for keeping track of time limits related to behaviours
 var angry_counter = 0
 var last_attack = ATTACK_SPEED
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -50,6 +54,7 @@ func _physics_process(delta):
 		player.take_damage(5)
 	
 	last_attack += delta
+	check_if_dead()
 
 func handle_states():
 	"""Handle the different states of the enemies behaviour"""
@@ -106,8 +111,18 @@ func flip_sprite(vel: Vector2):
 	elif dir > 0:
 		get_node("Sprite").set_flip_h(false)
 
-func hit_by_proj():
+func hit_by_proj(dmg):
+	current_hp -= dmg
+	
+func hit_by_axe():
 	print("Oof")
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
+	current_hp -= 2
+	
+func check_if_dead():
+	if current_hp <= 0:
+		queue_free()
+
+func set_hp(num):
+	current_hp = num
+	max_hp = num
+

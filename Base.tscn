@@ -1,9 +1,46 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://assets/sprites/base.jpg" type="Texture" id=1]
+[ext_resource path="res://assets/sprites/Inside_house.png" type="Texture" id=1]
+[ext_resource path="res://CraftArea.gd" type="Script" id=2]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 20, 14 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 10, 20.5 )
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 82, 56 )
 
 [node name="Base" type="Node2D"]
+z_index = -1
 
-[node name="Sprite" type="Sprite" parent="."]
-scale = Vector2( 0.4, 0.4 )
+[node name="Sprite2" type="Sprite" parent="."]
 texture = ExtResource( 1 )
+
+[node name="Walls" type="StaticBody2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Walls"]
+polygon = PoolVector2Array( 8, 72, 8, 66, 82, 66, 82, -46, 26, -46, 26, -30, -26, -30, -48, -30, -48, -46, -82, -46, -82, 66, -8, 66, -8, 72, -88, 72, -88, -72, 88, -72, 88, 72 )
+
+[node name="Table" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Table"]
+position = Vector2( 0, 12 )
+shape = SubResource( 1 )
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2( 72, 4.5 )
+shape = SubResource( 2 )
+
+[node name="CraftArea" type="Area2D" parent="."]
+script = ExtResource( 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CraftArea"]
+position = Vector2( 0, 10 )
+shape = SubResource( 3 )
+
+[connection signal="body_entered" from="CraftArea" to="CraftArea" method="_on_CraftArea_body_entered"]
+[connection signal="body_exited" from="CraftArea" to="CraftArea" method="_on_CraftArea_body_exited"]

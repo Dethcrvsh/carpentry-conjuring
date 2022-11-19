@@ -16,4 +16,4 @@ shape = SubResource( 1 )
 rotation = 1.5708
 texture = ExtResource( 1 )
 
-[connection signal="body_entered" from="." to="." method="_on_Node2D_body_entered"]
+[connection signal="area_entered" from="." to="." method="_on_Node2D_area_entered"]

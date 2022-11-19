@@ -42,7 +42,7 @@ const TROLL = 0
 
 const SPAWN_RATE = 1
 
-var enemies = {TROLL: preload("res://Enemy.tscn")}
+var enemies = {TROLL: preload("res://Basic_enemy.tscn")}
 var enemy_spawn = {TROLL: EnemySpawn.new(0.2, 3, 1.3)}
 
 var spawn_timer = 0
