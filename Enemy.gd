@@ -1,7 +1,7 @@
 extends KinematicBody2D
 
-onready var player = get_parent().get_node("Player")
-onready var base = get_parent().get_node("Base")
+onready var player = get_parent().get_parent().get_node("Player")
+onready var base = get_parent().get_parent().get_node("Base")
 
 # If the player gets inside this radius of the enemy, he go rage mode
 const ANGER_RADIUS = 50

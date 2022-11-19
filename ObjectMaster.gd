@@ -6,9 +6,11 @@ onready var cursormap = $CursorMap
 onready var objs = $Objects
 
 const Stol = preload("res://Stol.tscn")
+const books = preload("res://Bookshelf.tscn")
+const armc = preload("res://Armchair.tscn")
 
 var cursor_pos = null
-const buildings = {"BlOCKSHELF":Stol, "STOL":Stol, "ARMEDCHAIR":Stol}
+const buildings = {"BlOCKSHELF":books, "STOL":Stol, "ARMEDCHAIR":armc}
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
