@@ -29,9 +29,9 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
-	for item in buildings:
-		print(item)
-		print(inv[item])
+	#for item in buildings:
+	#	print(item)
+	#	print(inv[item])
 		
 	do_player_movement()
 	do_mouse_input(delta)

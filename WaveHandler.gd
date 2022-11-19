@@ -87,12 +87,12 @@ func do_next_wave():
 
 func get_spawn_directions():
 	var directions = [NORTH, EAST, SOUTH, WEST]
+	directions.shuffle()
 	var dir_num = get_num_of_dir()
 	
 	# Pop a random direction
 	for i in range(4 - dir_num):
-		var rand_index = randi()%directions.size()
-		directions.pop_at(rand_index)
+		directions.pop_front()
 	
 	return directions
 	
