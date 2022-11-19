@@ -83,6 +83,7 @@ func do_mouse_input(delta):
 			build_master.put_cursor(mous_pos)
 			if Input.is_action_just_pressed("build") and 0 < inv[buildings[inv_selected_index]]:
 				build_master.build_at(mous_pos, buildings[inv_selected_index])
+				inv[buildings[inv_selected_index]] -= 1
 		else:
 			if !rot_point.has_node("axe_hitbox"):
 				rot_point.look_at(mous_pos)
