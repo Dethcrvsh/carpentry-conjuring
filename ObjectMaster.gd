@@ -6,19 +6,24 @@ onready var cursormap = $CursorMap
 onready var objs = $Objects
 
 const Stol = preload("res://Stol.tscn")
+const books = preload("res://Bookshelf.tscn")
+const armc = preload("res://Armchair.tscn")
 const Gran = preload("res://Gran.tscn")
 const wood_drop = preload("res://wood_drop.tscn")
 
 var cursor_pos = null
 
-const buildings = {"BlOCKSHELF":Stol, "STOL":Stol, "ARMEDCHAIR":Stol}
-const fauna = {"GRAN":Gran,}
+const buildings = {"BlOCKSHELF":books, "STOL":Stol, "ARMEDCHAIR":armc}
+const fauna = {"GRAN":Gran}
 const fauna_drop = {"GRAN":wood_drop}
-const books = preload("res://Bookshelf.tscn")
-const armc = preload("res://Armchair.tscn")
 
 # Given in mouse pos
-const GRAN_POS = [Vector2(-9, 0)]
+const GRAN_POS = [Vector2(-9, 0), Vector2(-13, 5), Vector2(-20, 10), Vector2(9, 3),
+				  Vector2(0, 20), Vector2(9, 10), Vector2(-19, 10), Vector2(5, -5), 
+				  Vector2(0, -7), Vector2(-8, -8), Vector2(-6, 6), Vector2(15, 9), 
+				  Vector2(-19, 3), Vector2(0, 6), Vector2(12, -3), Vector2(19, 1), 
+				  Vector2(19, -7), Vector2(13, 13), Vector2(13, 37), Vector2(4, -9), 
+				  Vector2(-7, -4), Vector2(-11, 9)]
 
 
 # Called when the node enters the scene tree for the first time.
@@ -45,6 +50,8 @@ func place_object(pos, instance):
 func put_cursor(pos):
 	cursor_pos = cursormap.world_to_map(pos)
 
+func add_collision(pos):
+	collmap.set_cell(pos.x, pos.y, 0)
 
 func update_cursor():
 	for tile in cursormap.get_used_cells():

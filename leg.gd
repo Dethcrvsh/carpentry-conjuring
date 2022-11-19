@@ -1,6 +1,7 @@
 extends Area2D
 
 const SPEED = 200
+const DAMAGE = 5
 var velocity = Vector2()
 var life_timer = 2
 
@@ -22,5 +23,5 @@ func shoot_towards(pos):
 
 func _on_Node2D_body_entered(body):
 	if body.has_method("hit_by_proj"):
-		body.hit_by_proj()
+		body.hit_by_proj(DAMAGE)
 		queue_free()

@@ -15,10 +15,16 @@ const ANGER_TIME = 5
 
 const MOVEMENT_SPEED = 25
 const ANGER_MOVEMENT_SPEED = 70
+const STUCK_COOLDOWN = 50
+
+var stuck_cooldown = 0
+var max_hp = 20
+var current_hp = max_hp
 
 # Different states of behaviour
 const ANGRY = 0
 const ATTACK_BASE = 1
+const STUCK = 2
 
 # The current state of the enemy. Might want a combination of
 # behaviours in the future
@@ -30,6 +36,7 @@ var path = []
 var angry_counter = 0
 var last_attack = ATTACK_SPEED
 
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass
@@ -40,7 +47,9 @@ func _process(delta):
 func _physics_process(delta):
 	handle_states()
 	
-	if ANGRY in states:
+	if STUCK in states:
+		do_stuck()
+	elif ANGRY in states:
 		do_anger(delta)
 	elif ATTACK_BASE in states:
 		do_base_attack()
@@ -50,6 +59,7 @@ func _physics_process(delta):
 		player.take_damage(5)
 	
 	last_attack += delta
+	check_if_dead()
 
 func handle_states():
 	"""Handle the different states of the enemies behaviour"""
@@ -74,6 +84,12 @@ func do_anger(delta):
 
 func do_base_attack():
 	follow_path()
+
+func do_stuck():
+	stuck_cooldown -= 1
+	if stuck_cooldown == 0:
+		print("Became unstuck")
+		become_unstuck()
 
 func get_player_distance() -> float:
 	return self.get_position().distance_to(player.get_position())
@@ -106,8 +122,23 @@ func flip_sprite(vel: Vector2):
 	elif dir > 0:
 		get_node("Sprite").set_flip_h(false)
 
-func hit_by_proj():
-	print("Oof")
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
+func hit_by_proj(dmg):
+	current_hp -= dmg
+	
+func check_if_dead():
+	if current_hp <= 0:
+		queue_free()
+
+func set_hp(num):
+	current_hp = num
+	max_hp = num
+
+func is_enemy():
+	pass
+
+func become_stuck():
+	stuck_cooldown = STUCK_COOLDOWN
+	states = [STUCK]
+
+func become_unstuck():
+	states = []
