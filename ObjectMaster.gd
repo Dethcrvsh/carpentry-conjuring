@@ -44,7 +44,7 @@ func place_object(pos, instance):
 	
 func put_cursor(pos):
 	cursor_pos = cursormap.world_to_map(pos)
-	print(cursor_pos)
+
 
 func update_cursor():
 	for tile in cursormap.get_used_cells():
