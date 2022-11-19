@@ -106,7 +106,8 @@ func flip_sprite(vel: Vector2):
 	elif dir > 0:
 		get_node("Sprite").set_flip_h(false)
 
-
+func hit_by_proj():
+	print("Oof")
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
 #	pass
