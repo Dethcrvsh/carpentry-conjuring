@@ -61,5 +61,4 @@ cell_tile_origin = 2
 show_collision = true
 format = 1
 tile_data = PoolIntArray( -2621486, 0, 0, 1900595, 0, 0 )
-
 [node name="Objects" type="Node2D" parent="."]
