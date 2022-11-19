@@ -13,6 +13,6 @@ margin_left = -35.0
 margin_top = -28.0
 margin_right = 49.0
 margin_bottom = 52.0
-color = Color( 0, 0, 0, 0.407843 )
+color = Color( 0, 0, 0, 0 )
 
 [node name="Map" parent="." instance=ExtResource( 1 )]

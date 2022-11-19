@@ -26,7 +26,7 @@ onready var SPAWN_POINTS = [
 ]
 onready var enemies_node = get_parent().get_parent().get_node("enemies")
 
-var wave_num = 10
+var wave_num = 0
 
 # The number of directions with the corresponding wave
 var num_of_dir = {[0, 1]: 1, [1, 2]: 2, [2, 3]: 3, [3, INF]: 4}
