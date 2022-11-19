@@ -50,3 +50,5 @@ position = Vector2( -2, 220 )
 
 [node name="West" type="Node2D" parent="SpawnPoints"]
 position = Vector2( -297, 11 )
+
+[node name="nature" type="Node2D" parent="."]
