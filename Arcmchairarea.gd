@@ -3,7 +3,7 @@ onready var collision = $collisionarea
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	collision.process(false)
+	pass
 
 func collision(thing):
 	pass

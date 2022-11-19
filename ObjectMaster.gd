@@ -6,16 +6,16 @@ onready var cursormap = $CursorMap
 onready var objs = $Objects
 
 const Stol = preload("res://Stol.tscn")
+const books = preload("res://Bookshelf.tscn")
+const armc = preload("res://Armchair.tscn")
 const Gran = preload("res://Gran.tscn")
 const wood_drop = preload("res://wood_drop.tscn")
 
 var cursor_pos = null
 
-const buildings = {"BlOCKSHELF":Stol, "STOL":Stol, "ARMEDCHAIR":Stol}
-const fauna = {"GRAN":Gran,}
+const buildings = {"BlOCKSHELF":books, "STOL":Stol, "ARMEDCHAIR":armc}
+const fauna = {"GRAN":Gran}
 const fauna_drop = {"GRAN":wood_drop}
-const books = preload("res://Bookshelf.tscn")
-const armc = preload("res://Armchair.tscn")
 
 # Given in mouse pos
 const GRAN_POS = [Vector2(-9, 0)]

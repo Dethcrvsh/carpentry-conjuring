@@ -24,7 +24,7 @@ func get_target():
 	var find_new_target = false
 	if target == null:
 		find_new_target = true
-	if !fire_range.overlaps_body(target):
+	elif !fire_range.overlaps_body(target):
 		find_new_target = true
 		target = null
 	for body in bodies:

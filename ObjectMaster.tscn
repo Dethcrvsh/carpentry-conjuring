@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://ObjectMaster.gd" type="Script" id=2]
 [ext_resource path="res://assets/sprites/cursor.png" type="Texture" id=3]
@@ -19,6 +19,9 @@
 0/shapes = [  ]
 0/z_index = 0
 
+[sub_resource type="ConvexPolygonShape2D" id=4]
+points = PoolVector2Array( 16, 16, 0, 16, 0, 0, 16, 0 )
+
 [sub_resource type="TileSet" id=2]
 0/name = "cursor.png 0"
 0/texture = ExtResource( 3 )
@@ -30,9 +33,16 @@
 0/navigation_offset = Vector2( 0, 0 )
 0/shape_offset = Vector2( 0, 0 )
 0/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+0/shape = SubResource( 4 )
 0/shape_one_way = false
-0/shape_one_way_margin = 0.0
-0/shapes = [  ]
+0/shape_one_way_margin = 1.0
+0/shapes = [ {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 4 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+} ]
 0/z_index = 0
 
 [node name="ObjectMaster" type="Node2D"]
@@ -52,7 +62,3 @@ format = 1
 tile_data = PoolIntArray( -851979, 0, 0, -786418, 0, 0, -786417, 0, 0, -786416, 0, 0, -786415, 0, 0, -786414, 0, 0, -786413, 0, 0, -786412, 0, 0, -720882, 0, 0, -720876, 0, 0, -720875, 0, 0, -720874, 0, 0, -720873, 0, 0, -655347, 0, 0, -655346, 0, 0, -655337, 0, 0, -589811, 0, 0, -589801, 0, 0, -589800, 0, 0, -524275, 0, 0, -524274, 0, 0, -524264, 0, 0, -458738, 0, 0, -458728, 0, 0, -393202, 0, 0, -393201, 0, 0, -393192, 0, 0, -327665, 0, 0, -327656, 0, 0, -262137, 0, 0, -262128, 0, 0, -262120, 0, 0, -196601, 0, 0, -196592, 0, 0, -196591, 0, 0, -196590, 0, 0, -196584, 0, 0, -131065, 0, 0, -131054, 0, 0, -131053, 0, 0, -131052, 0, 0, -131051, 0, 0, -131048, 0, 0, -65529, 0, 0, -65512, 0, 0, -65511, 0, 0, 7, 0, 0, 25, 0, 0, 65543, 0, 0, 65561, 0, 0, 131079, 0, 0, 131097, 0, 0, 196615, 0, 0, 196633, 0, 0, 262151, 0, 0, 262152, 0, 0, 262153, 0, 0, 262154, 0, 0, 262155, 0, 0, 262168, 0, 0, 262169, 0, 0, 327691, 0, 0, 327692, 0, 0, 327693, 0, 0, 327694, 0, 0, 327695, 0, 0, 327696, 0, 0, 327697, 0, 0, 327698, 0, 0, 327699, 0, 0, 327700, 0, 0, 327701, 0, 0, 327702, 0, 0, 327703, 0, 0, 327704, 0, 0, 917535, 0, 0 )
 
 [node name="Objects" type="Node2D" parent="."]
-
-[node name="buildings" type="Node2D" parent="Objects"]
-
-[node name="nature" type="Node2D" parent="Objects"]
