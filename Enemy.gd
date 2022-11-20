@@ -3,16 +3,17 @@ extends KinematicBody2D
 onready var player = get_parent().get_parent().get_node("Player")
 onready var base = get_parent().get_parent().get_node("Base")
 onready var path_finder = get_parent().get_parent().get_node("PathFinder")
+onready var objects = get_parent().get_parent().get_node("ObjectMaster").get_node("Objects")
 
 # If the player gets inside this radius of the enemy, he go rage mode
-const ANGER_RADIUS = 50
+const ANGER_RADIUS = 30
 const ATTACK_RADIUS = 20
 
 const DAMAGE = 5
 const ATTACK_SPEED = 1
 const HOUSE_DMG = DAMAGE
 
-const ANGER_TIME = 5
+const ANGER_TIME = 3
 
 const MOVEMENT_SPEED = 25
 const ANGER_MOVEMENT_SPEED = 70
@@ -26,6 +27,10 @@ var current_hp = max_hp
 const ANGRY = 0
 const ATTACK_BASE = 1
 const STUCK = 2
+const ATTACK_FURNITURE = 3
+
+const ATTACK_FURNITURE_CHANCE = 30
+const INTEREST_TIME = 10
 
 # The current state of the enemy. Might want a combination of
 # behaviours in the future
@@ -35,18 +40,31 @@ var path = []
 
 # Counters for keeping track of time limits related to behaviours
 var angry_counter = 0
+var interest_counter = 0
 var last_attack = ATTACK_SPEED
-
+var target = null
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass
+	randomize()
 
 func _process(delta):
 	pass
 
 func _physics_process(delta):
 	handle_states()
+	if ATTACK_BASE in states or ATTACK_FURNITURE in states:
+		# Attack furniture
+		if interest_counter > INTEREST_TIME:
+			if (randi() % 100) < ATTACK_FURNITURE_CHANCE:
+				if ATTACK_BASE in states:
+					states = []
+					states.append(ATTACK_FURNITURE)
+				elif ATTACK_FURNITURE in states:
+					states = []
+			interest_counter = 0
+	
+	interest_counter += delta
 	
 	if STUCK in states:
 		do_stuck()
@@ -54,6 +72,8 @@ func _physics_process(delta):
 		do_anger(delta)
 	elif ATTACK_BASE in states:
 		do_base_attack(delta)
+	elif ATTACK_FURNITURE in states:
+		do_furniture_attack()
 	
 	if get_player_distance() < ATTACK_RADIUS and last_attack >= ATTACK_SPEED:
 		last_attack = 0
@@ -66,6 +86,7 @@ func handle_states():
 	"""Handle the different states of the enemies behaviour"""
 	# If enemy has no state, attack the base
 	if not states:
+		interest_counter = 0
 		states.append(ATTACK_BASE)
 		path = calc_path(base.get_position())
 			
@@ -81,6 +102,35 @@ func handle_states():
 
 func calc_path(point: Vector2):
 	return path_finder.calc_path(self.get_position(), point)
+
+func do_furniture_attack():
+	var furniture = objects.get_children()
+	
+	if not target:
+		if furniture:
+			furniture.shuffle()
+			target = furniture[0]
+			path = []
+			print("target: " + str(target))
+		else:
+			states = []
+			states.append(ATTACK_BASE)
+	elif not path:
+		var furn = target.get_position()
+		var dir = [-16, 16]
+		dir.shuffle()
+		var dir_x = 0
+		var dir_y = 0
+		
+		if randi()%2 == 0:
+			dir_x = dir[0]
+		else:
+			dir_y = dir[0]
+
+		path = calc_path(Vector2(furn.x + dir_x, furn.y + dir_y))
+	else:
+		follow_path()
+		
 
 func do_anger(delta):
 	move_towards(player.get_position(), ANGER_MOVEMENT_SPEED)
