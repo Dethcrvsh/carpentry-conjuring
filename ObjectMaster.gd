@@ -54,3 +54,4 @@ func update_cursor():
 func remove_collision(pos):
 	var map_pos = collmap.world_to_map(pos)
 	collmap.set_cell(map_pos.x, map_pos.y, -1)
+	path_finder.add_point(pos)
