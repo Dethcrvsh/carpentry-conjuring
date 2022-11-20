@@ -4,6 +4,7 @@ onready var player = get_parent().get_parent().get_node("Player")
 onready var base = get_parent().get_parent().get_node("Base")
 onready var path_finder = get_parent().get_parent().get_node("PathFinder")
 onready var objects = get_parent().get_parent().get_node("ObjectMaster").get_node("Objects")
+onready var attack_points = get_parent().get_parent().get_node("BaseTargets")
 
 # If the player gets inside this radius of the enemy, he go rage mode
 const ANGER_RADIUS = 30
@@ -86,9 +87,15 @@ func handle_states():
 	"""Handle the different states of the enemies behaviour"""
 	# If enemy has no state, attack the base
 	if not states:
+		var points = attack_points.get_children()
+		print(points)
+		points.shuffle()
+		target = points[0]
+		
 		interest_counter = 0
 		states.append(ATTACK_BASE)
-		path = calc_path(base.get_position())
+		print(target.get_position())
+		path = calc_path(target.get_position())
 			
 	# Stop attacking the base and become angry
 	if not ANGRY in states and get_player_distance() < ANGER_RADIUS:
@@ -157,7 +164,7 @@ func get_player_distance() -> float:
 func follow_path():
 	if path:
 		var next_point = path[0]
-		if self.get_position().distance_to(next_point) <= 1:
+		if self.get_position().distance_to(next_point) <= 3:
 			path.pop_front()
 		else:
 			move_towards(next_point, MOVEMENT_SPEED)

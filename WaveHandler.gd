@@ -41,7 +41,7 @@ const WEST = 3
 const TROLL = 0
 const TROLL2 = 1
 
-const SPAWN_RATE = 2
+const SPAWN_RATE = 5
 
 var enemies = {
 	TROLL: preload("res://Basic_enemy.tscn"),
