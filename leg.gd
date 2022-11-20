@@ -1,7 +1,7 @@
 extends Area2D
 
 const SPEED = 200
-const DAMAGE = 5
+const DAMAGE = 3
 var velocity = Vector2()
 var life_timer = 2
 

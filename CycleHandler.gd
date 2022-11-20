@@ -5,6 +5,8 @@ onready var enemies = get_parent().get_node("enemies")
 onready var color = get_parent().get_parent().get_node("CanvasLayer").get_node("ColorRect")
 onready var music_day = get_parent().get_parent().get_node("MusicDay")
 onready var music_night = get_parent().get_parent().get_node("MusicNight")
+onready var base = get_parent().get_node("Base")
+onready var nature = get_parent().get_node("nature")
 
 const DAY_TIME_LENGTH = 60
 const FADE_TIME = 15
@@ -75,3 +77,6 @@ func _process(delta):
 				time_of_day = DAY
 				time_counter = 0
 				color.color = Color(0, 0, 0, 0)
+				
+				base.heal()
+				nature.spawn_trees(100)

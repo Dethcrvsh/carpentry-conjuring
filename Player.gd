@@ -7,10 +7,10 @@ var dead = false
 var cooldown = 0
 var health = 20
 var buildings = ["BlOCKSHELF", "STOL", "ARMEDCHAIR"]
-var build_costs = {"BlOCKSHELF":5, "STOL":35, "ARMEDCHAIR":25}
+var build_costs = {"BlOCKSHELF":2, "STOL":8, "ARMEDCHAIR":25}
 var inv = {"BlOCKSHELF":0, "STOL":0, "ARMEDCHAIR":0}
 var inv_selected_index = 0
-var wood = 75
+var wood = 0
 const inv_actions = {"inv_i_1":0,"inv_i_2":1,"inv_i_3":2}
 const SPEED = 125
 const ACC = 60
@@ -118,7 +118,7 @@ func die():
 	self.dead = true
 		
 func pickup_wood():
-	wood += 5
+	wood += 1
 	
 func set_craft_mode(value):
 	craft_mode = value

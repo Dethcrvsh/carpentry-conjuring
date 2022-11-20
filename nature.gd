@@ -16,10 +16,10 @@ const TREE_NUM = 1000
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	spawn_trees()
+	spawn_trees(TREE_NUM)
 
-func spawn_trees():
-	var spawn_points = get_random_spawn_points()
+func spawn_trees(num):
+	var spawn_points = get_random_spawn_points(num)
 	
 	for point in spawn_points:
 		var tree = TREE.instance()
@@ -27,14 +27,14 @@ func spawn_trees():
 		self.add_child(tree)
 	
 
-func get_random_spawn_points():
+func get_random_spawn_points(num):
 	randomize()
 	var spawn_points = []
 	var min_bound = path_finder.min_boundary
 	var max_bound = path_finder.max_boundary
 	print(max_bound.x - min_bound.x)
 	
-	while spawn_points.size () < TREE_NUM:
+	while spawn_points.size () < num:
 		var x = (randi() % int(max_bound.x - min_bound.x)) + min_bound.x
 		var y = (randi() % int(max_bound.y - min_bound.y)) + min_bound.y
 		var point = Vector2(x, y)

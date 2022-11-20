@@ -41,15 +41,16 @@ const WEST = 3
 const TROLL = 0
 const TROLL2 = 1
 
-const SPAWN_RATE = 5
+const SPAWN_RATE = 4
+var spawn_rate = 0
 
 var enemies = {
 	TROLL: preload("res://Basic_enemy.tscn"),
 	TROLL2: preload("res://Basic_enemy2.tscn")
 }
 var enemy_spawn = {
-	TROLL: EnemySpawn.new(0.2, 6, 1.3),
-	TROLL2: EnemySpawn.new(0.2, 6, 1.3)
+	TROLL: EnemySpawn.new(0.2, 4, 1.35),
+	TROLL2: EnemySpawn.new(0.2, 4, 1.35)
 }
 
 var spawn_timer = 0
@@ -63,7 +64,7 @@ func _ready():
 
 func _process(delta):
 	if spawns:
-		if spawn_timer > SPAWN_RATE:
+		if spawn_timer > spawn_rate:
 			spawn_next_enemy()
 			spawn_timer = 0
 		else:
@@ -82,6 +83,10 @@ func spawn_next_enemy():
 	print("spawn " + str(enemy) + " pos: " + str(enemy.position))
 
 func do_next_wave():
+	spawn_rate = SPAWN_RATE - 0.35*wave_num
+	if spawn_rate < 0.1:
+		spawn_rate = 0.1
+	
 	spawn_directions = get_spawn_directions()
 	spawns = []
 	

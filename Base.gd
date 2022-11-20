@@ -1,6 +1,7 @@
 extends Node2D
 
 var START_HEALTH = 500
+const HEAL = 250
 var health = START_HEALTH
 
 # Called when the node enters the scene tree for the first time.
@@ -24,4 +25,10 @@ func game_over():
 	var main = get_parent().get_parent()
 	var death_camera = main.get_node("Death").get_node("Control").get_node("Camera2D")
 	death_camera.make_current()
-	
+
+func heal():
+	if health < START_HEALTH - HEAL:
+		health += HEAL
+	else:
+		health = START_HEALTH
+
