@@ -4,7 +4,6 @@ extends Node2D
 onready var collmap = $CollisionMap
 onready var cursormap = $CursorMap
 onready var objs = $Objects
-onready var path_finder = get_parent().get_node("PathFinder")
 
 const Stol = preload("res://Stol.tscn")
 const books = preload("res://Bookshelf.tscn")
@@ -71,7 +70,6 @@ func spawn_trees():
 func remove_collision(pos):
 	var map_pos = collmap.world_to_map(pos)
 	collmap.set_cell(map_pos.x, map_pos.y, -1)
-	path_finder.remove_point(pos)
 
 func spawn_wood_drop(pos, tree_type):
 	var wood_drop_instance = fauna_drop["GRAN"].instance()
