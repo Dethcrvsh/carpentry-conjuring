@@ -6,8 +6,8 @@ onready var color = get_parent().get_parent().get_node("CanvasLayer").get_node("
 onready var music_day = get_parent().get_parent().get_node("MusicDay")
 onready var music_night = get_parent().get_parent().get_node("MusicNight")
 
-const DAY_TIME_LENGTH = 120
-const FADE_TIME = 30
+const DAY_TIME_LENGTH = 60
+const FADE_TIME = 15
 
 # Enums for times of day
 const DAY = 0
@@ -15,7 +15,7 @@ const NIGHT = 1
 
 # Colors
 const DAWN_DUSK_COLOR = Color(1, 0.25, 0, 0.3)
-const NIGHT_COLOR = Color(0, 0, 0.1, 0.85)
+const NIGHT_COLOR = Color(0, 0, 0.1, 0.7)
 
 var time_of_day = DAY
 var time_counter = 0
@@ -23,17 +23,13 @@ var fade_counter = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	time_counter = 60
+	time_counter = 0
 	music_day.play()
 	pass
 
 func _process(delta):
 	if time_of_day == DAY:
 		time_counter += delta
-		if music_day.volume_db < 0:
-			music_day.volume_db += delta
-		if music_day.volume_db > 0:
-			music_day.volume_db = 0
 	
 	if time_of_day == DAY:
 		if time_counter > DAY_TIME_LENGTH - FADE_TIME:
@@ -51,17 +47,19 @@ func _process(delta):
 			)	
 
 		if time_counter > DAY_TIME_LENGTH:
+			music_day.stop()
+			music_night.play()
 			wave_handler.do_next_wave()
 			time_of_day = NIGHT
 			time_counter = 0
 			fade_counter = 0
 	
 	if time_of_day == NIGHT:
-		if music_day.playing:
-			music_day.stop()
-			music_night.play()
 		if wave_handler.is_done_spawning() and enemies.get_child_count() == 0:
-			music_night.stop()
+			if music_night.playing:
+				music_night.stop()
+				music_day.play()
+				music_day.volume_db = 0.0
 			var fade = 1 - (fade_counter / FADE_TIME)
 			fade_counter += delta
 			color.color = Color(
@@ -72,8 +70,7 @@ func _process(delta):
 			)
 			
 			if fade_counter > FADE_TIME:
-				music_day.play()
-				music_day.volumd_db = 0
+				fade_counter = 0
 				time_of_day = DAY
 				time_counter = 0
 				color.color = Color(0, 0, 0, 0)

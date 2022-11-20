@@ -1,9 +1,8 @@
 extends Area2D
 
 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
+onready var house_sprite = get_parent().get_node("outside_sprite")
+onready var light = get_parent().get_node("light")
 
 
 # Called when the node enters the scene tree for the first time.
@@ -17,10 +16,14 @@ func _ready():
 
 
 func _on_CraftArea_body_entered(body):
+	house_sprite.visible = false
+	light.visible = true
 	if body.has_method("set_craft_mode"):
 		body.set_craft_mode(true)
 
 
 func _on_CraftArea_body_exited(body):
+	house_sprite.visible = true
+	light.visible = false
 	if body.has_method("set_craft_mode"):
 		body.set_craft_mode(false)
