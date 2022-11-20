@@ -87,15 +87,12 @@ func handle_states():
 	"""Handle the different states of the enemies behaviour"""
 	# If enemy has no state, attack the base
 	if not states:
-		var points = attack_points.get_children()
-		print(points)
-		points.shuffle()
-		target = points[0]
-		
 		interest_counter = 0
 		states.append(ATTACK_BASE)
-		print(target.get_position())
-		path = calc_path(target.get_position())
+		path = calc_path(base.get_position())
+		
+		if not path:
+			print("tried going to " + str(target.get_position()))
 			
 	# Stop attacking the base and become angry
 	if not ANGRY in states and get_player_distance() < ANGER_RADIUS:

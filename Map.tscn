@@ -119,50 +119,14 @@ scale = Vector2( 1.5, 1.5 )
 [node name="BaseTargets" type="Node2D" parent="."]
 position = Vector2( 20, 46 )
 
-[node name="Node2D" type="Node2D" parent="BaseTargets"]
-position = Vector2( -92, 42 )
-
-[node name="Node2D2" type="Node2D" parent="BaseTargets"]
-position = Vector2( -36, 42 )
-
 [node name="Node2D3" type="Node2D" parent="BaseTargets"]
-position = Vector2( -4, 42 )
-
-[node name="Node2D4" type="Node2D" parent="BaseTargets"]
-position = Vector2( 36, 42 )
+position = Vector2( -20, 42 )
 
 [node name="Node2D5" type="Node2D" parent="BaseTargets"]
-position = Vector2( 92, -6 )
-
-[node name="Node2D6" type="Node2D" parent="BaseTargets"]
-position = Vector2( 92, -38 )
-
-[node name="Node2D7" type="Node2D" parent="BaseTargets"]
-position = Vector2( 92, -102 )
-
-[node name="Node2D8" type="Node2D" parent="BaseTargets"]
-position = Vector2( 92, -70 )
+position = Vector2( 84, -46 )
 
 [node name="Node2D9" type="Node2D" parent="BaseTargets"]
-position = Vector2( 52, -126 )
+position = Vector2( -20, -142 )
 
 [node name="Node2D10" type="Node2D" parent="BaseTargets"]
-position = Vector2( -92, -126 )
-
-[node name="Node2D11" type="Node2D" parent="BaseTargets"]
-position = Vector2( -52, -126 )
-
-[node name="Node2D12" type="Node2D" parent="BaseTargets"]
-position = Vector2( 4, -126 )
-
-[node name="Node2D13" type="Node2D" parent="BaseTargets"]
-position = Vector2( -124, -102 )
-
-[node name="Node2D14" type="Node2D" parent="BaseTargets"]
-position = Vector2( -124, -6 )
-
-[node name="Node2D15" type="Node2D" parent="BaseTargets"]
-position = Vector2( -124, -38 )
-
-[node name="Node2D16" type="Node2D" parent="BaseTargets"]
-position = Vector2( -124, -70 )
+position = Vector2( -124, -46 )
