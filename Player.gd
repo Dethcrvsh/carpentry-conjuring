@@ -7,10 +7,10 @@ var dead = false
 var cooldown = 0
 var health = 20
 var buildings = ["BlOCKSHELF", "STOL", "ARMEDCHAIR"]
-var build_costs = {"BlOCKSHELF":2, "STOL":10, "ARMEDCHAIR":15}
+var build_costs = {"BlOCKSHELF":10, "STOL":20, "ARMEDCHAIR":25}
 var inv = {"BlOCKSHELF":0, "STOL":0, "ARMEDCHAIR":0}
 var inv_selected_index = 0
-var wood = 0
+var wood = 20
 const inv_actions = {"inv_i_1":0,"inv_i_2":1,"inv_i_3":2}
 const SPEED = 125
 const ACC = 60
@@ -87,7 +87,7 @@ func do_mouse_input(delta):
 		else:
 			if !rot_point.has_node("axe_hitbox"):
 				rot_point.look_at(mous_pos)
-			if Input.is_action_just_pressed("attack") and cooldown <= 0:
+			if Input.is_action_pressed("attack") and cooldown <= 0:
 				var attack = axe_attack.instance()
 				attack.position = axe_point.position
 				rot_point.add_child(attack)

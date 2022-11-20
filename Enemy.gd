@@ -129,8 +129,7 @@ func hit_by_proj(dmg):
 	current_hp -= dmg
 	
 func hit_by_axe():
-	print("Oof")
-	current_hp -= 2
+	current_hp -= 5
 	
 func check_if_dead():
 	if current_hp <= 0:
