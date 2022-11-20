@@ -115,3 +115,18 @@ scale = Vector2( 1.5, 1.5 )
 [node name="light5" parent="lights" instance=ExtResource( 4 )]
 position = Vector2( 0, -78 )
 scale = Vector2( 1.5, 1.5 )
+
+[node name="BaseTargets" type="Node2D" parent="."]
+position = Vector2( 20, 46 )
+
+[node name="Node2D3" type="Node2D" parent="BaseTargets"]
+position = Vector2( -20, 42 )
+
+[node name="Node2D5" type="Node2D" parent="BaseTargets"]
+position = Vector2( 84, -46 )
+
+[node name="Node2D9" type="Node2D" parent="BaseTargets"]
+position = Vector2( -20, -142 )
+
+[node name="Node2D10" type="Node2D" parent="BaseTargets"]
+position = Vector2( -124, -46 )

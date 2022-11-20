@@ -6,8 +6,8 @@ onready var color = get_parent().get_parent().get_node("CanvasLayer").get_node("
 onready var music_day = get_parent().get_parent().get_node("MusicDay")
 onready var music_night = get_parent().get_parent().get_node("MusicNight")
 
-const DAY_TIME_LENGTH = 60
-const FADE_TIME = 15
+const DAY_TIME_LENGTH = 2
+const FADE_TIME = 1
 
 # Enums for times of day
 const DAY = 0
@@ -70,6 +70,7 @@ func _process(delta):
 			)
 			
 			if fade_counter > FADE_TIME:
+				wave_handler.wave_num += 1
 				fade_counter = 0
 				time_of_day = DAY
 				time_counter = 0

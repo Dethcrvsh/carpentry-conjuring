@@ -25,8 +25,12 @@ position = Vector2( 0, 6 )
 shape = SubResource( 1 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
+<<<<<<< HEAD
 current = true
 zoom = Vector2( 0.3, 0.3 )
+=======
+zoom = Vector2( 2, 2 )
+>>>>>>> 3168bdb61b7d7164e1a9fc737641f1d762bd8e1b
 
 [node name="CrazyCarlHead" type="Sprite" parent="."]
 position = Vector2( 3, 0 )
