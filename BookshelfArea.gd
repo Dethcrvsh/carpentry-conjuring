@@ -15,8 +15,8 @@ func _ready():
 func _process(delta):
 	for thing in get_overlapping_areas():
 		if thing.has_method("is_enemy"):
-			thing.allow_hit_built()
+			thing.allow_hit_built(get_parent())
 			
 	for thing in get_overlapping_bodies():
 		if thing.has_method("is_enemy"):
-			thing.allow_hit_built()
+			thing.allow_hit_built(get_parent())

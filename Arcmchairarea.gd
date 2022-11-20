@@ -38,7 +38,7 @@ func _process(delta):
 				actiave_chair(thing)
 				add_coll(global_position)
 				cooldown = COOLDOWN_TIMER
-				thing.allow_hit_built()
+				thing.allow_hit_built(get_parent())
 				is_active = false
 				
 		for thing in get_overlapping_bodies():
@@ -46,5 +46,5 @@ func _process(delta):
 				actiave_chair(thing)
 				add_coll(global_position)
 				cooldown = COOLDOWN_TIMER
-				thing.allow_hit_built()
+				thing.allow_hit_built(get_parent())
 				is_active = false

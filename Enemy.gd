@@ -155,8 +155,8 @@ func become_stuck():
 func become_unstuck():
 	states = []
 
-func allow_hit_built():
-	print("I can get hit")
+func allow_hit_built(thing):
+	thing.take_dmg(5)
 
 func update_path():
 	if path:
