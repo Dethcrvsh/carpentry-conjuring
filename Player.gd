@@ -18,6 +18,8 @@ const DECC = 40
 const ATTACK_TIME = 0.2
 const COOLDOWN_TIME = 1
 const MAX_HP = 20
+const HEAL_INTERVAL = 30
+var heal_time = 0
 
 onready var build_master = get_parent().get_node("ObjectMaster")
 onready var camera = $Camera2D
@@ -129,3 +131,14 @@ func do_inv_check():
 				if craft_mode and wood >= build_costs[buildings[inv_selected_index]]:
 					wood -= build_costs[buildings[inv_selected_index]]
 					inv[buildings[inv_selected_index]] += 1
+
+func heal_player():
+	if health == MAX_HP:
+		return
+		
+	if heal_time <= 0:
+		heal_time = HEAL_INTERVAL
+		health += 1
+	else:
+		heal_time -= 1
+		
