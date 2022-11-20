@@ -4,7 +4,7 @@ extends Node2D
 onready var collmap = $CollisionMap
 onready var cursormap = $CursorMap
 onready var objs = $Objects
-onready var path_finder = get_parent().get_node("PathFinder")
+onready var path_finder = get_parent().get_node("path_finder")
 
 const Stol = preload("res://Stol.tscn")
 const books = preload("res://Bookshelf.tscn")
@@ -41,6 +41,7 @@ func put_cursor(pos):
 
 func add_collision(pos):
 	collmap.set_cell(pos.x, pos.y, 0)
+	path_finder.remove_point(pos)
 
 func update_cursor():
 	for tile in cursormap.get_used_cells():
@@ -53,4 +54,3 @@ func update_cursor():
 func remove_collision(pos):
 	var map_pos = collmap.world_to_map(pos)
 	collmap.set_cell(map_pos.x, map_pos.y, -1)
-	path_finder.remove_point(pos)
