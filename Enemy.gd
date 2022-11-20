@@ -53,7 +53,7 @@ func _physics_process(delta):
 	elif ANGRY in states:
 		do_anger(delta)
 	elif ATTACK_BASE in states:
-		do_base_attack()
+		do_base_attack(delta)
 	
 	if get_player_distance() < ATTACK_RADIUS and last_attack >= ATTACK_SPEED:
 		last_attack = 0
@@ -67,7 +67,7 @@ func handle_states():
 	# If enemy has no state, attack the base
 	if not states:
 		states.append(ATTACK_BASE)
-		path = path_finder.calc_path(self.get_position(), base.get_position())
+		path = calc_path(base.get_position())
 			
 	# Stop attacking the base and become angry
 	if not ANGRY in states and get_player_distance() < ANGER_RADIUS:
@@ -79,11 +79,14 @@ func handle_states():
 	if angry_counter >= ANGER_TIME:
 		states.erase(ANGRY)
 
+func calc_path(point: Vector2):
+	return path_finder.calc_path(self.get_position(), point)
+
 func do_anger(delta):
 	move_towards(player.get_position(), ANGER_MOVEMENT_SPEED)
 	angry_counter += delta
 
-func do_base_attack():
+func do_base_attack(delta):
 	follow_path()
 
 func do_stuck():
@@ -151,3 +154,7 @@ func become_stuck():
 
 func become_unstuck():
 	states = []
+
+func update_path():
+	if path:
+		path = calc_path(path[len(path)-1])
