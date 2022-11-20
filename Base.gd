@@ -1,6 +1,6 @@
 extends Node2D
 
-var START_HEALTH = 20
+var START_HEALTH = 500
 var health = START_HEALTH
 
 # Called when the node enters the scene tree for the first time.

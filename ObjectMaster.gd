@@ -30,7 +30,7 @@ func build_at(pos, type):
 func place_object(pos, instance):
 	# add collision
 	var col_build_pos = collmap.world_to_map(pos)
-	collmap.set_cell(col_build_pos.x, col_build_pos.y, 0)
+	add_collision(pos)
 	# add build object
 	var obj_build_pos = collmap.map_to_world(col_build_pos)
 	objs.add_child(instance)
@@ -40,7 +40,8 @@ func put_cursor(pos):
 	cursor_pos = cursormap.world_to_map(pos)
 
 func add_collision(pos):
-	collmap.set_cell(pos.x, pos.y, 0)
+	var col_build_pos = collmap.world_to_map(pos)
+	collmap.set_cell(col_build_pos.x, col_build_pos.y, 0)
 	path_finder.remove_point(pos)
 
 func update_cursor():
