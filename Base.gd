@@ -15,7 +15,13 @@ func _process(delta):
 func take_dmg(dmg):
 	health -= dmg
 	if health <= 0:
-		game_over()
+		get_tree().quit()
+		#game_over()
 
 func game_over():
-	get_tree().change_scene("res://DeathScene.tscn")
+	print("Game Over")
+	var camera = get_parent().get_node("Player/Camera2D")
+	var main = get_parent().get_parent()
+	var death_camera = main.get_node("Death").get_node("Control").get_node("Camera2D")
+	death_camera.make_current()
+	
