@@ -10,6 +10,7 @@ const ATTACK_RADIUS = 20
 
 const DAMAGE = 5
 const ATTACK_SPEED = 1
+const HOUSE_DMG = DAMAGE
 
 const ANGER_TIME = 5
 
@@ -88,7 +89,6 @@ func do_base_attack():
 func do_stuck():
 	stuck_cooldown -= 1
 	if stuck_cooldown == 0:
-		print("Became unstuck")
 		become_unstuck()
 
 func get_player_distance() -> float:
@@ -139,6 +139,11 @@ func set_hp(num):
 
 func is_enemy():
 	pass
+
+func allow_hit_base():
+	if ATTACK_BASE in states and last_attack >= ATTACK_SPEED:
+		last_attack = 0
+		base.take_dmg(HOUSE_DMG)
 
 func become_stuck():
 	stuck_cooldown = STUCK_COOLDOWN
