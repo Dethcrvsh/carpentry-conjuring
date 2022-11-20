@@ -41,6 +41,7 @@ func put_cursor(pos):
 
 func add_collision(pos):
 	collmap.set_cell(pos.x, pos.y, 0)
+	path_finder.remove_point(pos)
 
 func update_cursor():
 	for tile in cursormap.get_used_cells():
@@ -53,4 +54,3 @@ func update_cursor():
 func remove_collision(pos):
 	var map_pos = collmap.world_to_map(pos)
 	collmap.set_cell(map_pos.x, map_pos.y, -1)
-	path_finder.remove_point(pos)

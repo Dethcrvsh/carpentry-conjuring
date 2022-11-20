@@ -19,7 +19,7 @@ shape = SubResource( 1 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
 current = true
-zoom = Vector2( 0.5, 0.5 )
+zoom = Vector2( 0.2, 0.2 )
 
 [node name="CrazyCarlHead" type="Sprite" parent="."]
 position = Vector2( 3, 0 )
