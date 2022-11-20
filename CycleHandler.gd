@@ -53,7 +53,7 @@ func _process(delta):
 				NIGHT_COLOR.g, 
 				NIGHT_COLOR.b, 
 				NIGHT_COLOR.a * fade
-			)	
+			)
 			
 			if fade_counter > FADE_TIME:
 				time_of_day = DAY
