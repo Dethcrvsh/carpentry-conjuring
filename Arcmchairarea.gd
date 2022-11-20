@@ -1,16 +1,44 @@
 extends Area2D
-onready var collision = $collisionarea
+
+var collision = true
+const COOLDOWN_TIMER = 100
+const hp = 5
+var cooldown = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass
 
-func collision(thing):
-	pass
+func actiave_chair(thing):
+	thing.become_stuck()
+
+func remove_coll(pos):
+	var objmaster = get_parent().get_parent().get_parent()
+	objmaster.remove_collision(pos)
+
+func add_coll(pos):
+	var objmaster = get_parent().get_parent().get_parent()
+	objmaster.add_collision(pos)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	for thing in get_overlapping_areas():
-		collision(thing)
-	for thing in get_overlapping_bodies():
-		collision(thing)
+	
+	if cooldown > 0:
+		cooldown -= 1
+
+	if cooldown == 0:
+		remove_coll(global_position)
+	
+	# Trap enemies
+	if cooldown == 0:
+		for thing in get_overlapping_areas():
+			if thing.has_method("is_enemy"):
+				actiave_chair(thing)
+				add_coll(global_position)
+				cooldown = COOLDOWN_TIMER
+				
+		for thing in get_overlapping_bodies():
+			if thing.has_method("is_enemy"):
+				actiave_chair(thing)
+				add_coll(global_position)
+				cooldown = COOLDOWN_TIMER

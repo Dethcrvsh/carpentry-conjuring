@@ -81,6 +81,40 @@ func get_point_index(point: Vector2) -> int:
 	point = point - min_boundary
 	return point.y * (max_boundary.x - min_boundary.x) + point.x
 
+func remove_point(point: Vector2):
+	point = collision_map.world_to_map(point)
+	var index = get_point_index(point)
+	
+	for y in range(-1, 2):
+		for x in range(-1, 2):
+			if x == 0 and y == 0:
+				continue
+			
+			var neigh_point = Vector2(x, y) + point
+			var neigh_index = get_point_index(neigh_point)
+			
+			if not astar.has_point(neigh_index):
+				continue
+			
+			astar.connect_points(index, neigh_index, true)
+
+func add_point(point: Vector2):
+	point = collision_map.world_to_map(point)
+	var index = get_point_index(point)
+	
+	for y in range(-1, 2):
+		for x in range(-1, 2):
+			if x == 0 and y == 0:
+				continue
+			
+			var neigh_point = Vector2(x, y) + point
+			var neigh_index = get_point_index(neigh_point)
+			
+			if not astar.has_point(neigh_index):
+				continue
+			
+			astar.disconnect_points(index, neigh_index, true)
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
 #	pass

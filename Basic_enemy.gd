@@ -6,7 +6,6 @@ extends "res://Enemy.gd"
 func _ready():
 	self.set_hp(20)
 
-
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
 #	pass

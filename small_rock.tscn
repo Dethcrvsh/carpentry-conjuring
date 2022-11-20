@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://assets/sprites/small_rock.png" type="Texture" id=1]
+[ext_resource path="res://small_rock.gd" type="Script" id=2]
+
+[node name="small_rock" type="Node2D"]
+script = ExtResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( -2, -11 )
+texture = ExtResource( 1 )

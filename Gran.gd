@@ -3,13 +3,13 @@ var TREE_HIT_CD = 12
 var hit = 0
 var TREE_HP = 2
 var hp = TREE_HP
+const wood = preload("res://wood_drop.tscn")
 
-onready var ObjectMaster = get_parent().get_parent()
-onready var TreeDrop = 0
-
+onready var ObjectMaster = get_parent().get_parent().get_node("ObjectMaster")
+onready var collmap = ObjectMaster.get_node("CollisionMap")
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass
+	ObjectMaster.add_collision(self.position)
 
 func _physics_process(delta):
 	if hit > 0:
@@ -17,7 +17,7 @@ func _physics_process(delta):
 
 func tree_down():
 	ObjectMaster.remove_collision(self.position)
-	ObjectMaster.spawn_wood_drop(self.position, "GRAN")
+	spawn_wood_drop()
 	queue_free()
 
 func hit_by_axe():
@@ -28,3 +28,7 @@ func hit_by_axe():
 			tree_down()
 			
 		
+func spawn_wood_drop():
+	var wood_drop_instance = wood.instance()
+	get_parent().add_child(wood_drop_instance)
+	wood_drop_instance.position = position

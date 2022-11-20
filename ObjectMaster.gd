@@ -4,27 +4,22 @@ extends Node2D
 onready var collmap = $CollisionMap
 onready var cursormap = $CursorMap
 onready var objs = $Objects
+onready var path_finder = get_parent().get_node("PathFinder")
+onready var enemies = get_parent().get_node("enemies")
 
 const Stol = preload("res://Stol.tscn")
 const books = preload("res://Bookshelf.tscn")
 const armc = preload("res://Armchair.tscn")
-const Gran = preload("res://Gran.tscn")
 const wood_drop = preload("res://wood_drop.tscn")
 
 var cursor_pos = null
 
 const buildings = {"BlOCKSHELF":books, "STOL":Stol, "ARMEDCHAIR":armc}
-const fauna = {"GRAN":Gran}
-const fauna_drop = {"GRAN":wood_drop}
-
-# Given in mouse pos
-const GRAN_POS = [Vector2(-9, 0)]
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	# Spawn in the trees the first time the scene is loaded
-	spawn_trees()
+	pass
 
 func _process(delta):
 	update_cursor()
@@ -36,7 +31,7 @@ func build_at(pos, type):
 func place_object(pos, instance):
 	# add collision
 	var col_build_pos = collmap.world_to_map(pos)
-	collmap.set_cell(col_build_pos.x, col_build_pos.y, 0)
+	add_collision(pos)
 	# add build object
 	var obj_build_pos = collmap.map_to_world(col_build_pos)
 	objs.add_child(instance)
@@ -45,25 +40,26 @@ func place_object(pos, instance):
 func put_cursor(pos):
 	cursor_pos = cursormap.world_to_map(pos)
 
+func add_collision(pos):
+	var col_build_pos = collmap.world_to_map(pos)
+	collmap.set_cell(col_build_pos.x, col_build_pos.y, 0)
+	path_finder.add_point(pos)
+	update_enemies()
 
 func update_cursor():
 	for tile in cursormap.get_used_cells():
 		cursormap.set_cell(tile.x, tile.y, -1)
+
 	if cursor_pos != null:
-		cursormap.set_cell(cursor_pos.x, cursor_pos.y, 1)
+		cursormap.set_cell(cursor_pos.x, cursor_pos.y, 0)
 		cursor_pos = null
-	
-func spawn_trees():
-	for pos in GRAN_POS:
-		var gran_instance = fauna["GRAN"].instance()
-		var new_pos = cursormap.map_to_world(pos)
-		place_object(new_pos, gran_instance)
 
 func remove_collision(pos):
 	var map_pos = collmap.world_to_map(pos)
 	collmap.set_cell(map_pos.x, map_pos.y, -1)
+	path_finder.remove_point(pos)
+	update_enemies()
 
-func spawn_wood_drop(pos, tree_type):
-	var wood_drop_instance = fauna_drop["GRAN"].instance()
-	get_parent().add_child(wood_drop_instance)
-	wood_drop_instance.position = pos
+func update_enemies():
+	for enemy in enemies.get_children():
+		enemy.update_path()

@@ -10,18 +10,22 @@ const ATTACK_RADIUS = 20
 
 const DAMAGE = 5
 const ATTACK_SPEED = 1
+const HOUSE_DMG = DAMAGE
 
 const ANGER_TIME = 5
 
 const MOVEMENT_SPEED = 25
 const ANGER_MOVEMENT_SPEED = 70
+const STUCK_COOLDOWN = 50
 
+var stuck_cooldown = 0
 var max_hp = 20
 var current_hp = max_hp
 
 # Different states of behaviour
 const ANGRY = 0
 const ATTACK_BASE = 1
+const STUCK = 2
 
 # The current state of the enemy. Might want a combination of
 # behaviours in the future
@@ -44,10 +48,12 @@ func _process(delta):
 func _physics_process(delta):
 	handle_states()
 	
-	if ANGRY in states:
+	if STUCK in states:
+		do_stuck()
+	elif ANGRY in states:
 		do_anger(delta)
 	elif ATTACK_BASE in states:
-		do_base_attack()
+		do_base_attack(delta)
 	
 	if get_player_distance() < ATTACK_RADIUS and last_attack >= ATTACK_SPEED:
 		last_attack = 0
@@ -61,7 +67,7 @@ func handle_states():
 	# If enemy has no state, attack the base
 	if not states:
 		states.append(ATTACK_BASE)
-		path = path_finder.calc_path(self.get_position(), base.get_position())
+		path = calc_path(base.get_position())
 			
 	# Stop attacking the base and become angry
 	if not ANGRY in states and get_player_distance() < ANGER_RADIUS:
@@ -73,12 +79,20 @@ func handle_states():
 	if angry_counter >= ANGER_TIME:
 		states.erase(ANGRY)
 
+func calc_path(point: Vector2):
+	return path_finder.calc_path(self.get_position(), point)
+
 func do_anger(delta):
 	move_towards(player.get_position(), ANGER_MOVEMENT_SPEED)
 	angry_counter += delta
 
-func do_base_attack():
+func do_base_attack(delta):
 	follow_path()
+
+func do_stuck():
+	stuck_cooldown -= 1
+	if stuck_cooldown == 0:
+		become_unstuck()
 
 func get_player_distance() -> float:
 	return self.get_position().distance_to(player.get_position())
@@ -126,3 +140,21 @@ func set_hp(num):
 	current_hp = num
 	max_hp = num
 
+func is_enemy():
+	pass
+
+func allow_hit_base():
+	if ATTACK_BASE in states and last_attack >= ATTACK_SPEED:
+		last_attack = 0
+		base.take_dmg(HOUSE_DMG)
+
+func become_stuck():
+	stuck_cooldown = STUCK_COOLDOWN
+	states = [STUCK]
+
+func become_unstuck():
+	states = []
+
+func update_path():
+	if path:
+		path = calc_path(path[len(path)-1])
