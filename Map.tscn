@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://ground.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Player.tscn" type="PackedScene" id=2]
@@ -9,6 +9,8 @@
 [ext_resource path="res://CycleHandler.gd" type="Script" id=7]
 [ext_resource path="res://WaveHandler.gd" type="Script" id=8]
 [ext_resource path="res://nature.gd" type="Script" id=9]
+[ext_resource path="res://small_rock.tscn" type="PackedScene" id=10]
+[ext_resource path="res://big_rock.tscn" type="PackedScene" id=11]
 
 [node name="Map" type="Node2D"]
 
@@ -56,6 +58,45 @@ position = Vector2( -1072, -8 )
 [node name="nature" type="Node2D" parent="."]
 script = ExtResource( 9 )
 
+[node name="small_rock" parent="nature" instance=ExtResource( 10 )]
+position = Vector2( 232, -56 )
+
+[node name="big_rock" parent="nature" instance=ExtResource( 11 )]
+position = Vector2( -48, 192 )
+
+[node name="small_rock2" parent="nature" instance=ExtResource( 10 )]
+position = Vector2( 56, 216 )
+
+[node name="small_rock3" parent="nature" instance=ExtResource( 10 )]
+position = Vector2( 280, 72 )
+
+[node name="small_rock4" parent="nature" instance=ExtResource( 10 )]
+position = Vector2( -104, 250 )
+
+[node name="small_rock5" parent="nature" instance=ExtResource( 10 )]
+position = Vector2( -344, 152 )
+
+[node name="small_rock6" parent="nature" instance=ExtResource( 10 )]
+position = Vector2( -168, -168 )
+
+[node name="small_rock7" parent="nature" instance=ExtResource( 10 )]
+position = Vector2( 376, -40 )
+
+[node name="small_rock8" parent="nature" instance=ExtResource( 10 )]
+position = Vector2( -344, -56 )
+
+[node name="big_rock2" parent="nature" instance=ExtResource( 11 )]
+position = Vector2( -272, 64 )
+
+[node name="small_rock9" parent="nature" instance=ExtResource( 10 )]
+position = Vector2( 136, -152 )
+
+[node name="big_rock3" parent="nature" instance=ExtResource( 11 )]
+position = Vector2( -64, -240 )
+
+[node name="small_rock10" parent="nature" instance=ExtResource( 10 )]
+position = Vector2( 216, 186 )
+
 [node name="lights" type="Node2D" parent="."]
 visible = false
 
@@ -74,3 +115,18 @@ scale = Vector2( 1.5, 1.5 )
 [node name="light5" parent="lights" instance=ExtResource( 4 )]
 position = Vector2( 0, -78 )
 scale = Vector2( 1.5, 1.5 )
+
+[node name="BaseTargets" type="Node2D" parent="."]
+position = Vector2( 20, 46 )
+
+[node name="Node2D3" type="Node2D" parent="BaseTargets"]
+position = Vector2( -20, 42 )
+
+[node name="Node2D5" type="Node2D" parent="BaseTargets"]
+position = Vector2( 84, -46 )
+
+[node name="Node2D9" type="Node2D" parent="BaseTargets"]
+position = Vector2( -20, -142 )
+
+[node name="Node2D10" type="Node2D" parent="BaseTargets"]
+position = Vector2( -124, -46 )

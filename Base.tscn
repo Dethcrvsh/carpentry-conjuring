@@ -28,7 +28,7 @@ extents = Vector2( 82, 56 )
 extents = Vector2( 8, 3 )
 
 [sub_resource type="RectangleShape2D" id=5]
-extents = Vector2( 93.5, 77 )
+extents = Vector2( 104, 85 )
 
 [sub_resource type="RectangleShape2D" id=8]
 extents = Vector2( 70.5, 53.5 )
@@ -61,27 +61,23 @@ texture = ExtResource( 7 )
 occluder = SubResource( 6 )
 
 [node name="Walls" type="StaticBody2D" parent="."]
-visible = false
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Walls"]
 polygon = PoolVector2Array( 8, 72, 8, 66, 82, 66, 82, -46, 26, -46, 26, -30, -26, -30, -48, -30, -48, -46, -82, -46, -82, 66, -8, 66, -8, 72, -88, 72, -88, -72, 88, -72, 88, 72 )
 
 [node name="Table" type="StaticBody2D" parent="."]
-visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Table"]
 position = Vector2( 0, 12 )
 shape = SubResource( 1 )
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
-visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
 position = Vector2( 72, 4.5 )
 shape = SubResource( 2 )
 
 [node name="CraftArea" type="Area2D" parent="."]
-visible = false
 script = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CraftArea"]
@@ -89,7 +85,6 @@ position = Vector2( 0, 10 )
 shape = SubResource( 3 )
 
 [node name="Entrance" type="StaticBody2D" parent="."]
-visible = false
 position = Vector2( 0, 69 )
 collision_layer = 4
 collision_mask = 2
@@ -98,11 +93,10 @@ collision_mask = 2
 shape = SubResource( 4 )
 
 [node name="AttackArea" type="Area2D" parent="."]
-visible = false
 script = ExtResource( 4 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea"]
-position = Vector2( -0.5, 0 )
+position = Vector2( -1, 0 )
 shape = SubResource( 5 )
 
 [node name="light" parent="." instance=ExtResource( 6 )]
