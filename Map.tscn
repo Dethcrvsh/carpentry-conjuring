@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://ground.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Player.tscn" type="PackedScene" id=2]
@@ -11,6 +11,8 @@
 [ext_resource path="res://nature.gd" type="Script" id=9]
 [ext_resource path="res://small_rock.tscn" type="PackedScene" id=10]
 [ext_resource path="res://big_rock.tscn" type="PackedScene" id=11]
+[ext_resource path="res://Bridge.tscn" type="PackedScene" id=12]
+[ext_resource path="res://Cave.tscn" type="PackedScene" id=13]
 
 [node name="Map" type="Node2D"]
 
@@ -44,7 +46,7 @@ script = ExtResource( 8 )
 [node name="SpawnPoints" type="Node2D" parent="."]
 
 [node name="North" type="Node2D" parent="SpawnPoints"]
-position = Vector2( -8, -984 )
+position = Vector2( -8, -960 )
 
 [node name="East" type="Node2D" parent="SpawnPoints"]
 position = Vector2( 1024, 24 )
@@ -130,3 +132,18 @@ position = Vector2( -20, -142 )
 
 [node name="Node2D10" type="Node2D" parent="BaseTargets"]
 position = Vector2( -124, -46 )
+
+[node name="Bridge" parent="." instance=ExtResource( 12 )]
+position = Vector2( -8, -1016 )
+
+[node name="Bridge2" parent="." instance=ExtResource( 12 )]
+position = Vector2( 1056, 24 )
+rotation = 1.5708
+
+[node name="Cave" parent="." instance=ExtResource( 13 )]
+position = Vector2( -1064, 8 )
+rotation = -1.5708
+
+[node name="Cave2" parent="." instance=ExtResource( 13 )]
+position = Vector2( 0, 880 )
+rotation = -3.14159
