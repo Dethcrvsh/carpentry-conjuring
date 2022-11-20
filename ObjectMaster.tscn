@@ -1,15 +1,14 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://assets/sprites/chare.png" type="Texture" id=1]
 [ext_resource path="res://ObjectMaster.gd" type="Script" id=2]
-[ext_resource path="res://assets/sprites/cursor.png" type="Texture" id=3]
 
 [sub_resource type="TileSet" id=3]
-0/name = "cursor.png 0"
-0/texture = ExtResource( 3 )
+0/name = "chare.png 0"
+0/texture = ExtResource( 1 )
 0/tex_offset = Vector2( 0, 0 )
 0/modulate = Color( 1, 1, 1, 1 )
-0/region = Rect2( 0, 0, 16, 16 )
+0/region = Rect2( 8, 0, 32, 32 )
 0/tile_mode = 0
 0/occluder_offset = Vector2( 0, 0 )
 0/navigation_offset = Vector2( 0, 0 )
