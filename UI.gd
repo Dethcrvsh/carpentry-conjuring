@@ -2,6 +2,7 @@ extends Control
 
 
 onready var player = get_parent().get_parent().get_node("Map").get_node("Player")
+onready var base = get_parent().get_parent().get_node("Map").get_node("Base")
 onready var text = $TextEdit
 
 # Called when the node enters the scene tree for the first time.
@@ -13,6 +14,7 @@ func _ready():
 func _process(delta):
 	var ui_text = ("hp:" + str(player.health) + "/" + str(player.MAX_HP) + "\n"
 						+ "wood: " + str(player.wood) + "\n")
+	ui_text += "house hp: " + str(base.health) + "\n"
 	for key in player.inv:
 		ui_text += key + " : " + str(player.inv[key]) + "\n"
 	ui_text += "mode: "

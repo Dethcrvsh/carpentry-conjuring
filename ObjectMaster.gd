@@ -5,6 +5,7 @@ onready var collmap = $CollisionMap
 onready var cursormap = $CursorMap
 onready var objs = $Objects
 onready var path_finder = get_parent().get_node("PathFinder")
+onready var enemies = get_parent().get_node("enemies")
 
 const Stol = preload("res://Stol.tscn")
 const books = preload("res://Bookshelf.tscn")
@@ -30,7 +31,7 @@ func build_at(pos, type):
 func place_object(pos, instance):
 	# add collision
 	var col_build_pos = collmap.world_to_map(pos)
-	collmap.set_cell(col_build_pos.x, col_build_pos.y, 0)
+	add_collision(pos)
 	# add build object
 	var obj_build_pos = collmap.map_to_world(col_build_pos)
 	objs.add_child(instance)
@@ -40,8 +41,10 @@ func put_cursor(pos):
 	cursor_pos = cursormap.world_to_map(pos)
 
 func add_collision(pos):
-	collmap.set_cell(pos.x, pos.y, 0)
-	path_finder.remove_point(pos)
+	var col_build_pos = collmap.world_to_map(pos)
+	collmap.set_cell(col_build_pos.x, col_build_pos.y, 0)
+	path_finder.add_point(pos)
+	update_enemies()
 
 func update_cursor():
 	for tile in cursormap.get_used_cells():
@@ -54,3 +57,9 @@ func update_cursor():
 func remove_collision(pos):
 	var map_pos = collmap.world_to_map(pos)
 	collmap.set_cell(map_pos.x, map_pos.y, -1)
+	path_finder.remove_point(pos)
+	update_enemies()
+
+func update_enemies():
+	for enemy in enemies.get_children():
+		enemy.update_path()

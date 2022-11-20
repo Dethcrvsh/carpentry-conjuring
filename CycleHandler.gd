@@ -61,21 +61,19 @@ func _process(delta):
 			music_day.stop()
 			music_night.play()
 		if wave_handler.is_done_spawning() and enemies.get_child_count() == 0:
-			if music_night.playing:
-				music_night.stop()
-				music_day.play()
-				music_day.volume_db = -15
+			music_night.stop()
 			var fade = 1 - (fade_counter / FADE_TIME)
-			music_day.volume_db += delta/2
 			fade_counter += delta
 			color.color = Color(
 				NIGHT_COLOR.r, 
 				NIGHT_COLOR.g, 
 				NIGHT_COLOR.b, 
 				NIGHT_COLOR.a * fade
-			)	
+			)
 			
 			if fade_counter > FADE_TIME:
+				music_day.play()
+				music_day.volumd_db = 0
 				time_of_day = DAY
 				time_counter = 0
 				color.color = Color(0, 0, 0, 0)

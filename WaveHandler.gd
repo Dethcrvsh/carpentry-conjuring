@@ -40,7 +40,7 @@ const WEST = 3
 # Enums for enemies
 const TROLL = 0
 
-const SPAWN_RATE = 1
+const SPAWN_RATE = 2
 
 var enemies = {TROLL: preload("res://Basic_enemy.tscn")}
 var enemy_spawn = {TROLL: EnemySpawn.new(0.2, 3, 1.3)}
@@ -52,7 +52,7 @@ var spawn_directions = []
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	randomize()
 
 func _process(delta):
 	if spawns:
