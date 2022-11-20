@@ -9,7 +9,7 @@ onready var ObjectMaster = get_parent().get_parent().get_node("ObjectMaster")
 onready var collmap = ObjectMaster.get_node("CollisionMap")
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	ObjectMaster.add_collision(collmap.world_to_map(self.position))
+	ObjectMaster.add_collision(self.position)
 
 func _physics_process(delta):
 	if hit > 0:
