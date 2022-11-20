@@ -4,7 +4,7 @@ extends Node2D
 onready var collmap = $CollisionMap
 onready var cursormap = $CursorMap
 onready var objs = $Objects
-onready var path_finder = get_parent().get_node("path_finder")
+onready var path_finder = get_parent().get_node("PathFinder")
 
 const Stol = preload("res://Stol.tscn")
 const books = preload("res://Bookshelf.tscn")
