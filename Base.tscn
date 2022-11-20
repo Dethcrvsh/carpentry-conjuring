@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://assets/sprites/Inside_house.png" type="Texture" id=1]
 [ext_resource path="res://CraftArea.gd" type="Script" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://assets/sprites/house_top.png" type="Texture" id=5]
 [ext_resource path="res://light.tscn" type="PackedScene" id=6]
 [ext_resource path="res://assets/sprites/house_bottom.png" type="Texture" id=7]
+[ext_resource path="res://HealArea.gd" type="Script" id=8]
 
 [sub_resource type="OccluderPolygon2D" id=7]
 polygon = PoolVector2Array( 89, 37, 11, -2, -8, -2, -88, 37, -88, -45, -10, -85, 9, -85, 90, -45 )
@@ -28,6 +29,9 @@ extents = Vector2( 8, 3 )
 
 [sub_resource type="RectangleShape2D" id=5]
 extents = Vector2( 93.5, 77 )
+
+[sub_resource type="RectangleShape2D" id=8]
+extents = Vector2( 70.5, 53.5 )
 
 [node name="Base" type="Node2D"]
 z_index = -1
@@ -104,6 +108,13 @@ shape = SubResource( 5 )
 [node name="light" parent="." instance=ExtResource( 6 )]
 position = Vector2( -1, -40 )
 scale = Vector2( 1.6, 1.6 )
+
+[node name="HealArea" type="Area2D" parent="."]
+script = ExtResource( 8 )
+
+[node name="HealCollision" type="CollisionShape2D" parent="HealArea"]
+position = Vector2( -0.5, 2.5 )
+shape = SubResource( 8 )
 
 [connection signal="body_entered" from="CraftArea" to="CraftArea" method="_on_CraftArea_body_entered"]
 [connection signal="body_exited" from="CraftArea" to="CraftArea" method="_on_CraftArea_body_exited"]
