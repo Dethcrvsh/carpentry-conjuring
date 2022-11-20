@@ -15,7 +15,7 @@ const NIGHT = 1
 
 # Colors
 const DAWN_DUSK_COLOR = Color(1, 0.25, 0, 0.3)
-const NIGHT_COLOR = Color(0, 0, 0.1, 0.85)
+const NIGHT_COLOR = Color(0, 0, 0.1, 0.7)
 
 var time_of_day = DAY
 var time_counter = 0
