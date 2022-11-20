@@ -70,6 +70,7 @@ func _process(delta):
 			)
 			
 			if fade_counter > FADE_TIME:
+				wave_handler.wave_num += 1
 				fade_counter = 0
 				time_of_day = DAY
 				time_counter = 0

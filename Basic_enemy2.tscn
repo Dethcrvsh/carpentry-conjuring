@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://Basic_enemy.gd" type="Script" id=1]
-[ext_resource path="res://assets/sprites/troll2.png" type="Texture" id=2]
+[ext_resource path="res://Basic_enemy2.gd" type="Script" id=1]
+[ext_resource path="res://assets/sprites/Troll2.png" type="Texture" id=2]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 5.09902
@@ -10,6 +10,8 @@ radius = 5.09902
 extents = Vector2( 15.5, 14.5 )
 
 [node name="Basic_enemy" type="KinematicBody2D"]
+collision_layer = 2
+collision_mask = 5
 script = ExtResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="."]

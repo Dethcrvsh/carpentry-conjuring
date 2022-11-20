@@ -7,7 +7,7 @@ const FIRE_RATE = 1
 onready var fire_range = $fire_range
 var target = null
 var fire_cooldown = 0
-var health = 20
+var health = 25
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
