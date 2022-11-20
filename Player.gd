@@ -86,7 +86,7 @@ func do_mouse_input(delta):
 		else:
 			if !rot_point.has_node("axe_hitbox"):
 				rot_point.look_at(mous_pos)
-			if Input.is_action_just_pressed("attack") and cooldown <= 0:
+			if Input.is_action_pressed("attack") and cooldown <= 0:
 				var attack = axe_attack.instance()
 				attack.position = axe_point.position
 				rot_point.add_child(attack)

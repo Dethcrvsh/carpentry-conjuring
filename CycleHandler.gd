@@ -73,7 +73,7 @@ func _process(delta):
 			
 			if fade_counter > FADE_TIME:
 				music_day.play()
-				music_day.volumd_db = 0
+				music_day.volumd_db = 0.0
 				time_of_day = DAY
 				time_counter = 0
 				color.color = Color(0, 0, 0, 0)
