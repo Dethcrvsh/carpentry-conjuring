@@ -7,7 +7,7 @@ const FIRE_RATE = 1
 onready var fire_range = $fire_range
 var target = null
 var fire_cooldown = 0
-
+var health = 20
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -42,3 +42,12 @@ func shoot_at_target(delta):
 	elif fire_cooldown > 0:
 		fire_cooldown -= delta
 
+func remove_coll(pos):
+	var objmaster = get_parent().get_parent()
+	objmaster.remove_collision(pos)
+
+func take_dmg(dmg):
+	health -= dmg
+	if health <= 0:
+		remove_coll(global_position)
+		queue_free()

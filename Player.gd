@@ -20,6 +20,7 @@ const COOLDOWN_TIME = 1
 const MAX_HP = 20
 
 onready var build_master = get_parent().get_node("ObjectMaster")
+onready var camera = $Camera2D
 onready var rot_point = $rotation_point
 onready var axe_point = $rotation_point/axe_point
 
@@ -29,7 +30,7 @@ const respawn_timer = preload("res://RespawnTimer.tscn")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass 
+	camera.make_current()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
