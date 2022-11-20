@@ -48,8 +48,8 @@ var enemies = {
 	TROLL2: preload("res://Basic_enemy2.tscn")
 }
 var enemy_spawn = {
-	TROLL: EnemySpawn.new(0.2, 3, 1.3),
-	TROLL2: EnemySpawn.new(0.2, 3, 1.3)
+	TROLL: EnemySpawn.new(0.2, 6, 1.3),
+	TROLL2: EnemySpawn.new(0.2, 6, 1.3)
 }
 
 var spawn_timer = 0
