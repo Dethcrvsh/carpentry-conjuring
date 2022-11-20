@@ -29,8 +29,8 @@ const ATTACK_BASE = 1
 const STUCK = 2
 const ATTACK_FURNITURE = 3
 
-const ATTACK_FURNITURE_CHANCE = 30
-const INTEREST_TIME = 10
+const ATTACK_FURNITURE_CHANCE = 5
+const INTEREST_TIME = 1
 
 # The current state of the enemy. Might want a combination of
 # behaviours in the future
@@ -106,6 +106,13 @@ func calc_path(point: Vector2):
 func do_furniture_attack():
 	var furniture = objects.get_children()
 	
+	# The furniture has died
+	if target and not is_instance_valid(target):
+		target = null
+		states = []
+		path = []
+		return
+	
 	if not target:
 		if furniture:
 			furniture.shuffle()
@@ -179,8 +186,7 @@ func hit_by_proj(dmg):
 	current_hp -= dmg
 	
 func hit_by_axe():
-	print("Oof")
-	current_hp -= 2
+	current_hp -= 5
 	
 func check_if_dead():
 	if current_hp <= 0:
@@ -204,6 +210,10 @@ func become_stuck():
 
 func become_unstuck():
 	states = []
+
+func allow_hit_built(thing):
+	if thing == target:
+		thing.take_dmg(DAMAGE)
 
 func update_path():
 	if path:
