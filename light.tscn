@@ -25,5 +25,5 @@ frame_5/delay_sec = 0.0
 
 [node name="Light2D" type="Light2D" parent="."]
 texture = SubResource( 1 )
-energy = 2.0
+energy = 0.8
 shadow_enabled = true

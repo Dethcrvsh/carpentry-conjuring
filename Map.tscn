@@ -57,10 +57,7 @@ position = Vector2( -1072, -8 )
 script = ExtResource( 9 )
 
 [node name="lights" type="Node2D" parent="."]
-
-[node name="light" parent="lights" instance=ExtResource( 4 )]
-position = Vector2( -2, -54 )
-scale = Vector2( 1.5, 1.5 )
+visible = false
 
 [node name="light2" parent="lights" instance=ExtResource( 4 )]
 position = Vector2( -92, 0 )
